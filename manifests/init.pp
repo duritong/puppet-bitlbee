@@ -32,10 +32,6 @@ class bitlbee (
 
 ) inherits bitlbee::params {
 
-	include ::bitlbee::install
-	include ::bitlbee::config
-	include ::bitlbee::service
-
 	Class['::bitlbee::install'] ->
 	Class['::bitlbee::config'] ->
 	Class['::bitlbee::service']

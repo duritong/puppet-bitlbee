@@ -2,9 +2,9 @@
 #
 # This class contains every parameter which will be used in this puppet module
 # for setting up the bitlbee service
-class bitlbee::params {
+class bitlbee::params inherits bitlbee {
 
-	$package_ensure = "latest"
+	$package_ensure = 'latest'
 	$package_name = 'bitlbee'
 
 	$service_manage = true
@@ -22,7 +22,7 @@ class bitlbee::params {
 	$operpassword = undef
 	$hostname = $fqdn
 	$motdfile = '/etc/bitlbee/motd.txt'
-	$configdir = undef
+	$configdir = '/etc/bitlbee'
 	$pinginterval = undef
 	$pingtimeout = undef
 	$proxy = undef
