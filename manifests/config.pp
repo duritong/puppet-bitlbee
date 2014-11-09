@@ -3,29 +3,11 @@
 # Class which configures the bitlbee service
 class bitlbee::config {
 
-	if ($bitlbee::config_purge) and ($bitlbee::package_ensure in [ 'absent', 'purged' ]) {
-
-		$file_ensure = absent
-	}
-	else {
-
-		$file_ensure = present
-	}
-
-	if ($bitlbee::config_purge) {
-
-		file { "${bitlbee::configdir}":
-
-			ensure => directory,
-			purge => true,
-		}
-	}
-
 	file { "${bitlbee::configdir}/bitlbee.conf":
 
 		notify => service[$bitlbee::service_name],
 
-		ensure => $file_ensure,
+		ensure => file,
 		mode => '0640',
 		owner => 'root',
 		group => 'root',
@@ -35,7 +17,7 @@ class bitlbee::config {
 
 		notify => service[$bitlbee::service_name],
 
-		ensure => $file_ensure,
+		ensure => file,
 		mode => '0644',
 		owner => 'root',
 		group => 'root',

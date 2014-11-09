@@ -169,7 +169,7 @@ Protocols = <%= @protocols %>
 ## The location of this file may be different on other distros/OSes. For
 ## example, try /etc/ssl/ca-bundle.pem on OpenSUSE.
 ##
-<% if @cafile %>
+<% if @ssl and @cafile %>
 CAfile = <%= @cafile %>
 <% end %>
 
