@@ -2,29 +2,41 @@
 #
 # Initialization class for the bitlbee service
 class bitlbee (
-  $package_name    = $bitlbee::params::package_name,
-  $package_version = $bitlbee::params::package_version,
-  $configdir       = $bitlbee::params::configdir,
-  $mode            = $bitlbee::params::mode,
-  $user            = $bitlbee::params::user,
-  $port            = $bitlbee::params::port,
-  $authmode        = $bitlbee::params::authmode,
-  $authpassword    = $bitlbee::params::authpassword,
-  $chathostname    = $bitlbee::params::chathostname,
-  $location        = $bitlbee::params::location,
-  $motd            = $bitlbee::params::motd,
-  $user            = $bitlbee::params::user,
+
+	$package_name = $bitlbee::params::package_name,
+	$package_ensure = $bitlbee::params::package_ensure,
+	$package_name = $bitlbee::params::package_name,
+
+	$service_manage = $bitlbee::params::service_manage,
+	$service_enable = $bitlbee::params::service_enable,
+	$service_ensure = $bitlbee::params::service_ensure,
+	$service_name = $bitlbee::params::service_name,
+
+	$runmode = $bitlbee::params::runmode,
+	$user = $bitlbee::params::user,
+	$daemoninterface = $bitlbee::params::daemoninterface,
+	$daemonport = $bitlbee::params::daemonport,
+	$clientinterface = $bitlbee::params::clientinterface,
+	$authmode = $bitlbee::params::authmode,
+	$authpassword = $bitlbee::params::authpassword,
+	$operpassword = $bitlbee::params::operpassword,
+	$hostname = $bitlbee::params::hostname,
+	$motdfile = $bitlbee::params::motdfile,
+	$configdir = $bitlbee::params::configdir,
+	$pinginterval = $bitlbee::params::pinginterval,
+	$pingtimeout = $bitlbee::params::pingtimeout,
+	$proxy = $bitlbee::params::proxy,
+	$protocols = $bitlbee::params::protocols,
+	$cafile = $bitlbee::params::cafile,
+	$private = $bitlbee::params::private,
+
 ) inherits bitlbee::params {
 
-  if $motd {
-    motd::register{'bitlbee':}
-  }
+	include ::bitlbee::install
+	include ::bitlbee::config
+	include ::bitlbee::service
 
-  include ::bitlbee::install
-  include ::bitlbee::config
-  include ::bitlbee::service
-
-  Class['::bitlbee::install'] ->
-  Class['::bitlbee::config'] ->
-  Class['::bitlbee::service']
+	Class['::bitlbee::install'] ->
+	Class['::bitlbee::config'] ->
+	Class['::bitlbee::service']
 }

@@ -2,14 +2,18 @@
 #
 # Class which configures the bitlbee service
 class bitlbee::config {
-  file { 'bitlbee.conf':
-    path    => "${bitlbee::configdir}/bitlbee.conf",
-    content => template('bitlbee/bitlbee.conf.erb'),
-    notify  => Exec['bitlbee']
-  }
-  file { 'motd.txt':
-    path    => "${bitlbee::configdir}/motd.txt",
-    content => template('bitlbee/motd.txt.erb'),
-    notify  => Exec['bitlbee']
-  }
+
+	file { 'bitlbee.conf':
+
+		notify => Service["bitlbee"],
+		path => "${bitlbee::configdir}/bitlbee.conf",
+		content => template('bitlbee/bitlbee.conf.erb'),
+	}
+
+	file { 'motd.txt':
+
+		notify => Service["bitlbee"],
+		path => "${bitlbee::configdir}/motd.txt",
+		content => template('bitlbee/motd.txt.erb'),
+	}
 }

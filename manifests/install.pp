@@ -2,7 +2,9 @@
 #
 # Installation of the bitlbee package
 class bitlbee::install {
-  package { $bitlbee::package_name:
-    ensure  => $bitlbee::package_version,
-  }
+
+	package { $package_name:
+
+		ensure => $package_ensure,
+	}
 }
