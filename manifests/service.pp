@@ -1,19 +1,20 @@
 # Class: bitlbee::service
 #
 # Class which ensures the bitlbee service is running
-class bitlbee::service inherits bitlbee {
+class bitlbee::service {
 
-	if ! ($service_ensure in [ 'running', 'stopped' ]) {
+	if !($bitlbee::service_ensure in [ 'running', 'stopped' ]) {
 
 		fail('service_ensure parameter must be running or stopped')
 	}
 
-	if $service_manage == true {
+	if $bitlbee::service_manage == true {
 
-		service { $service_name:
+		service { $bitlbee::service_name:
 
-			enable => $service_enable,
-			ensure => $service_ensure,
+			enable => $bitlbee::service_enable,
+			ensure => $bitlbee::service_ensure,
+			hasstatus => false,
 		}
 	}
 }

@@ -1,10 +1,10 @@
 # Class: bitlbee::install
 #
 # Installation of the bitlbee package
-class bitlbee::install inherits bitlbee {
+class bitlbee::install {
 
-	package { $package_name:
+	package { $bitlbee::package_name:
 
-		ensure => $package_ensure,
+		ensure => $bitlbee::package_ensure,
 	}
 }

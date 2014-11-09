@@ -1,27 +1,44 @@
 # Class: bitlbee::config
 #
 # Class which configures the bitlbee service
-class bitlbee::config inherits bitlbee {
+class bitlbee::config {
 
-	file { 'bitlbee.conf':
+	if ($bitlbee::config_purge) and ($bitlbee::package_ensure in [ 'absent', 'purged' ]) {
 
-		ensure=> $package_ensure,
-		mode => '0644',
-		owner => 'root',
-		group => 'root',
-		path => "${bitlbee::configdir}/bitlbee.conf",
-		content => template('bitlbee/bitlbee.conf.erb'),
-		notify => Service[$service_name],
+		$file_ensure = absent
+	}
+	else {
+
+		$file_ensure = present
 	}
 
-	file { 'motd.txt':
+	if ($bitlbee::config_purge) {
 
-		ensure=> $package_ensure,
+		file { "${bitlbee::configdir}":
+
+			ensure => directory,
+			purge => true,
+		}
+	}
+
+	file { "${bitlbee::configdir}/bitlbee.conf":
+
+		notify => service[$bitlbee::service_name],
+
+		ensure => $file_ensure,
+		mode => '0640',
+		owner => 'root',
+		group => 'root',
+		content => template('bitlbee/bitlbee.conf.erb'),
+	}->
+	file { "${bitlbee::configdir}/motd.txt":
+
+		notify => service[$bitlbee::service_name],
+
+		ensure => $file_ensure,
 		mode => '0644',
 		owner => 'root',
 		group => 'root',
-		path => "${bitlbee::configdir}/motd.txt",
 		content => template('bitlbee/motd.txt.erb'),
-		notify => Service[$service_name],
 	}
 }
