@@ -9,8 +9,8 @@ class bitlbee::config {
 
 		ensure => file,
 		mode => '0640',
-		owner => 'root',
-		group => 'root',
+		owner => 'bitlbee',
+		group => 'bitlbee',
 		content => template('bitlbee/bitlbee.conf.erb'),
 	}->
 	file { "${bitlbee::configdir}/motd.txt":
@@ -19,8 +19,8 @@ class bitlbee::config {
 
 		ensure => file,
 		mode => '0644',
-		owner => 'root',
-		group => 'root',
+		owner => 'bitlbee',
+		group => 'bitblee',
 		content => template('bitlbee/motd.txt.erb'),
 	}
 }
