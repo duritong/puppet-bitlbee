@@ -9,10 +9,11 @@ rvm:
 
 env:
   - PUPPET_VERSION=3.7.5
+  - PUPPET_VERSION=4.0.0
 
 script:
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s
-  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s bitlbee development
+  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s pakiti development
   - package_cloud push visibilityspots/puppet-development-modules/el/6 *.rpm
 
 notifications:
