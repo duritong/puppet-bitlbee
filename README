@@ -36,12 +36,13 @@ Tested on CentOS 6
 node 'HOSTNAME' {
   class {
    'bitlbee':
-      mode         => 'X',
-      authmode     => 'X',
-      authpassword => 'md5hash',
-      chathostname => 'NAME',
-      location     => 'LOCATION',
-      motd         => true/false
+      package_version => 'installed|latest',
+      mode            => 'X',
+      authmode        => 'X',
+      authpassword    => 'md5hash',
+      chathostname    => 'NAME',
+      location        => 'LOCATION',
+      motd            => true/false
     ;
   }
 }

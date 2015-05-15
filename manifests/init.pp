@@ -2,27 +2,63 @@
 #
 # Initialization class for the bitlbee service
 class bitlbee (
-  $configdir    = $bitlbee::params::configdir,
-  $mode         = $bitlbee::params::mode,
-  $user         = $bitlbee::params::user,
-  $port         = $bitlbee::params::port,
-  $authmode     = $bitlbee::params::authmode,
-  $authpassword = $bitlbee::params::authpassword,
-  $chathostname = $bitlbee::params::chathostname,
-  $location     = $bitlbee::params::location,
-  $motd         = $bitlbee::params::motd,
-  $user         = $bitlbee::params::user,
-) inherits bitlbee::params {
 
-  if $motd {
-    motd::register{'bitlbee':}
-  }
+	$package_ensure = latest,
+	$package_name = 'bitlbee',
 
-  include ::bitlbee::install
-  include ::bitlbee::config
-  include ::bitlbee::service
+	$service_manage = true,
+	$service_enable = true,
+	$service_ensure = running,
+	$service_name = 'bitlbee',
 
-  Class['::bitlbee::install'] ->
-  Class['::bitlbee::config'] ->
-  Class['::bitlbee::service']
+	$runmode = undef,
+	$user = 'bitlbee',
+	$daemoninterface = undef,
+	$daemonport = undef,
+	$clientinterface = undef,
+	$authmode = undef,
+	$authpassword = undef,
+	$operpassword = undef,
+	$hostname = $fqdn,
+	$motdfile = '/etc/bitlbee/motd.txt',
+	$configdir = '/etc/bitlbee',
+	$pinginterval = undef,
+	$pingtimeout = undef,
+	$proxy = undef,
+	$protocols = undef,
+	$ssl = false,
+	$cafile = '/etc/ssl/certs/ca-certificates.crt',
+	$private = undef,
+
+) {
+
+	validate_string($package_ensure)
+	validate_string($package_name)
+
+	validate_bool($service_manage)
+	validate_bool($service_enable)
+	validate_string($service_ensure)
+	validate_string($service_name)
+
+	validate_string($runmode)
+	validate_string($user)
+	validate_string($daemoninterface)
+	validate_string($clientinterface)
+	validate_string($authmode)
+	validate_string($authpassword)
+	validate_string($operpassword)
+	validate_string($hostname)
+	validate_absolute_path($motdfile)
+	validate_absolute_path($configdir)
+	validate_string($pinginterval)
+	validate_string($pingtimeout)
+	validate_string($proxy)
+	validate_string($protocols)
+	validate_bool($ssl)
+	validate_absolute_path($cafile)
+	validate_string($private)
+
+	class{ 'bitlbee::install': }->
+	class{ 'bitlbee::config': }->
+	class{ 'bitlbee::service': }
 }
