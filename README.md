@@ -1,3 +1,5 @@
+# puppet-bitlbee [![Build Status](https://travis-ci.org/visibilityspots/puppet-bitlbee.svg?branch=master)](https://travis-ci.org/visibilityspots/puppet-bitlbee)
+
 Installation and configuration of a bitlbee server (http://www.bitlbee.org) using puppet
 
 The packages bitlbee and bitlbee-devel (available on the yum epel repository) will be installed. Make sure that a repository which contains those packages is enabled on your system.
@@ -18,7 +20,7 @@ AuthMode:
   Registered Only allow registered users to use this server; this disables the register- and the account command until the user identifies himself.
 
 AuthPassword:
-  
+
   Password has can be created with bitlbee once the instance has been installed:
 
   bitlbee -x hash <cleartext password>
@@ -31,8 +33,9 @@ Implemented motd usage. When using the motd module from https://github.com/ripie
 
 Tested on CentOS 6
 
-== Example for node.pp manifest: ==
+## Example for node.pp manifest: ==
 
+```puppet
 node 'HOSTNAME' {
   class {
    'bitlbee':
@@ -46,8 +49,9 @@ node 'HOSTNAME' {
     ;
   }
 }
+```
 
-== Sources: ==
+## Sources
 * http://bitlbee.org
 
 Feel free to report issue's or comments.

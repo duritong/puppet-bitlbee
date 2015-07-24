@@ -1,0 +1,8 @@
+name    	'puppet-bitlbee'
+version 	'1.0.0'
+source 		'Github'
+author 		'Jan Collijs'
+license 	'GPL'
+summary 	'This module manages a bitlbee server'
+description 	'Using this module the bitlbee server will be maintained'
+project_page 	'https://github.com/visibilityspots/puppet-bitlbee'
