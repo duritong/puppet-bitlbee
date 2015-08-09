@@ -5,7 +5,7 @@ class bitlbee::config {
 
   file { "${bitlbee::configdir}/bitlbee.conf":
     ensure  => file,
-    notify  => service[$bitlbee::service_name],
+    notify  => Service[$bitlbee::service_name],
     mode    => '0640',
     owner   => 'bitlbee',
     group   => 'bitlbee',
@@ -13,7 +13,7 @@ class bitlbee::config {
   }->
   file { "${bitlbee::configdir}/motd.txt":
     ensure  => file,
-    notify  => service[$bitlbee::service_name],
+    notify  => Service[$bitlbee::service_name],
     mode    => '0644',
     owner   => 'bitlbee',
     group   => 'bitblee',
