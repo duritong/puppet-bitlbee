@@ -35,7 +35,7 @@ class bitlbee::config (
     notify  => Service[$bitlbee::service_name],
     mode    => '0644',
     owner   => 'bitlbee',
-    group   => 'bitblee',
+    group   => 'bitlbee',
     content => template('bitlbee/motd.txt.erb'),
   }
 }
