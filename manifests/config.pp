@@ -20,6 +20,7 @@ class bitlbee::config (
   $ssl             = $::bitlbee::ssl,
   $cafile          = $::bitlbee::cafile,
   $private         = $::bitlbee::private,
+  $userconfigdir   = $::bitlbee::userconfigdir,
 ) {
 
   file { "${bitlbee::configdir}/bitlbee.conf":
@@ -38,4 +39,13 @@ class bitlbee::config (
     group   => 'bitlbee',
     content => template('bitlbee/motd.txt.erb'),
   }
+
+  file{"$userconfigdir":
+    ensure => 'directory',
+    owner  => "$user",
+    group  => 'bitlbee',
+    mode   => '0770',
+    notify => Service[$bitlbee::service_name],
+  }
+
 }
