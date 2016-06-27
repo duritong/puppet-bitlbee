@@ -29,6 +29,7 @@ class bitlbee (
   $ssl = false,
   $cafile = '/etc/ssl/certs/ca-certificates.crt',
   $private = undef,
+  $userconfigdir = '/var/lib/bitlbee',
 
   ) {
 
