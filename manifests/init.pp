@@ -3,62 +3,34 @@
 # Initialization class for the bitlbee service
 class bitlbee (
 
-  $package_ensure = latest,
-  $package_name = 'bitlbee',
+  Enum['latest','installed','present'] $package_ensure = latest,
+  String[1] $package_name = 'bitlbee',
 
-  $service_manage = true,
-  $service_enable = true,
-  $service_ensure = running,
-  $service_name = 'bitlbee',
+  Boolean $service_manage = true,
+  Boolean $service_enable = true,
+  Enum['running','stopped'] $service_ensure = running,
+  String[1] $service_name = 'bitlbee',
 
-  $runmode = undef,
-  $user = 'bitlbee',
-  $daemoninterface = undef,
-  $daemonport = undef,
-  $clientinterface = undef,
-  $authmode = undef,
-  $authpassword = undef,
-  $operpassword = undef,
-  $hostname = $fqdn,
-  $motdfile = '/etc/bitlbee/motd.txt',
-  $configdir = '/etc/bitlbee',
-  $pinginterval = undef,
-  $pingtimeout = undef,
-  $proxy = undef,
-  $protocols = undef,
-  $ssl = false,
-  $cafile = '/etc/ssl/certs/ca-certificates.crt',
-  $private = undef,
-  $userconfigdir = '/var/lib/bitlbee',
-
-  ) {
-
-  validate_string($package_ensure)
-  validate_string($package_name)
-
-  validate_bool($service_manage)
-  validate_bool($service_enable)
-  validate_string($service_ensure)
-  validate_string($service_name)
-
-  validate_string($runmode)
-  validate_string($user)
-  validate_string($daemoninterface)
-  validate_string($clientinterface)
-  validate_string($authmode)
-  validate_string($authpassword)
-  validate_string($operpassword)
-  validate_string($hostname)
-  validate_absolute_path($motdfile)
-  validate_absolute_path($configdir)
-  validate_string($pinginterval)
-  validate_string($pingtimeout)
-  validate_string($proxy)
-  validate_string($protocols)
-  validate_bool($ssl)
-  validate_absolute_path($cafile)
-  validate_string($private)
-
+  Optional[String[1]] $runmode = undef,
+  String[1] $user = 'bitlbee',
+  Optional[String[1]] $daemoninterface = undef,
+  Optional[String[1]] $daemonport = undef,
+  Optional[String[1]] $clientinterface = undef,
+  Optional[String[1]] $authmode = undef,
+  Optional[String[1]] $authpassword = undef,
+  Optional[String[1]] $operpassword = undef,
+  Optional[String[1]] $hostname = $fqdn,
+  Stdlib::Unixpath $motdfile = '/etc/bitlbee/motd.txt',
+  Stdlib::Unixpath $configdir = '/etc/bitlbee',
+  Optional[String[1]] $pinginterval = undef,
+  Optional[String[1]] $pingtimeout = undef,
+  Optional[String[1]] $proxy = undef,
+  Optional[String[1]] $protocols = undef,
+  Boolean $ssl = false,
+  Stdlib::Unixpath $cafile = '/etc/ssl/certs/ca-certificates.crt',
+  Optional[String[1]] $private = undef,
+  Stdlib::Unixpath $userconfigdir = '/var/lib/bitlbee',
+) {
   class{ 'bitlbee::install': }->
   class{ 'bitlbee::config': }->
   class{ 'bitlbee::service': }
