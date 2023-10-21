@@ -31,7 +31,7 @@ class bitlbee (
   Optional[String[1]] $private = undef,
   Stdlib::Unixpath $userconfigdir = '/var/lib/bitlbee',
 ) {
-  class{ 'bitlbee::install': }->
-  class{ 'bitlbee::config': }->
-  class{ 'bitlbee::service': }
+  class{ 'bitlbee::install': }
+    -> class{ 'bitlbee::config': }
+    -> class{ 'bitlbee::service': }
 }
